@@ -23,9 +23,10 @@
 
 ## Shared — `packages/shared`
 
-| Tool       | Role                                                                       |
-| ---------- | -------------------------------------------------------------------------- |
-| TypeScript | Shared interfaces — champion stats, build shapes, recommendation contracts |
+| Tool       | Role                                                                                          |
+| ---------- | --------------------------------------------------------------------------------------------- |
+| TypeScript | Type safety — all types are derived from Zod schemas via `z.infer<>`, never declared separately |
+| Zod        | Runtime validation and schema definition — source of truth for all shared data shapes        |
 
 ## Testing
 
@@ -73,6 +74,13 @@ not currently active. See ADR-0007.
 No infrastructure overhead for a personal tool. The abstraction boundary (a repository
 interface in `packages/shared`) means the storage layer can be swapped without touching
 business logic. See ADR-0007.
+
+**Zod for runtime validation**
+TypeScript types are erased at runtime and provide no protection against malformed
+payloads or unexpected API shapes. Zod enforces the contract at every external data
+boundary (Data Dragon CDN, URL params, JSON file reads) and serves as the single source
+of truth for shared data shapes — TypeScript types are derived via `z.infer<>`, never
+declared separately. See ADR-0008.
 
 **pnpm + Corepack over npm/Yarn**
 Strict dependency linking catches phantom dependency issues early. Significantly lighter
