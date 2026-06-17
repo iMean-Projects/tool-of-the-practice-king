@@ -17,6 +17,18 @@
 - No `any` — use `unknown` and narrow explicitly
 - Shared types live in `packages/shared` — never duplicate types across `apps/client` and `apps/api`
 - Prefer `type` over `interface` for data shapes; use `interface` only when extension via `extends` is intentional
+- **Types that cross a validation boundary must be derived from a Zod schema** — no standalone `type` or `interface` declarations for shapes that are fetched, serialized, or read from storage
+
+---
+
+## Runtime Validation
+
+- **Zod is the validation layer** for all external data boundaries: Data Dragon CDN responses, URL params, and JSON file reads
+- **Schemas are the source of truth** — TypeScript types are derived via `z.infer<>` and colocated in the same schema file; no parallel type declarations
+- **`parse()` over `safeParse()` at loader boundaries** — validation failures throw immediately; no silent fallback
+- **`safeParse()` is permitted** only when the call site must branch on success/failure without throwing (e.g. conditional UI logic) — never as a substitute for error handling in loaders
+- **Loaders are the single enforcement point** on the client — no validation inside components
+- See ADR-0008 for full rationale and schema file structure
 
 ---
 
@@ -115,8 +127,10 @@ src/
 
 ## Security Notes
 
-- All Data Dragon responses are typed and validated before use — no direct pass-through to state
-- URL params (`:championId`, `:buildId`) are validated against known champion IDs before any file I/O or API call
+- All Data Dragon responses are validated at runtime via Zod before use — no direct pass-through to state
+- URL params (`:championId`, `:buildId`) are parsed through a Zod schema before any file I/O or API call
+- JSON file reads are validated via Zod on load — a corrupted or schema-drifted file throws immediately
 - JSON file paths are constructed from a whitelist — never interpolated directly from user input
+- See ADR-0008 for the full validation strategy
 
 > ⚠️ If the tool is ever made public, a full security review of the file I/O layer is required before deployment.
