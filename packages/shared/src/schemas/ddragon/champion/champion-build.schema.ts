@@ -17,7 +17,7 @@ export const BuildSchema = z.object({
   updatedAt: z.date().nullable(),
   championKey: z.string().nonempty(),
   championId: z.string().nonempty(),
-  items: z.array(z.string().nonempty()).max(BuildConstants.ITEMS_ARRAY_LENGTH),
+  items: z.array(z.string().nonempty()).max(BuildConstants.BUILD_ARRAY_LENGTH),
   shards: z.tuple([OffenseShardSchema, FlexShardSchema, DefenseShardSchema]),
 });
 

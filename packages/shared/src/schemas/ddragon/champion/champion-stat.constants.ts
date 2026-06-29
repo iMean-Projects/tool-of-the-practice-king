@@ -66,7 +66,7 @@ const attackSpeedPerLevelMaxValue = 6;
 const attackSpeedMinValue = 0.475;
 const attackSpeedMaxValue = 0.85;
 
-export default {
+const BOUNDARIES = {
   hpMinValue,
   hpMaxValue,
   hpPerLevelMinValue,
@@ -107,4 +107,8 @@ export default {
   attackSpeedPerLevelMaxValue,
   attackSpeedMinValue,
   attackSpeedMaxValue,
+};
+
+export default {
+  boundaries: BOUNDARIES,
 } as const;

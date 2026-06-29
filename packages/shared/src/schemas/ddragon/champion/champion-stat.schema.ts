@@ -1,96 +1,111 @@
 import * as z from "zod";
 
-import StatsConstants from "./champion-stats.constants";
+import StatConstants from "./champion-stat.constants";
 
 // ────────────────────────────────────────────────────────────────────────────
 // ─── SCHEMA ─────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────
 
-export const ChampionStatsSchema = z.object({
+export const ChampionStatSchema = z.object({
   // ─── HP & HP Per Level ────────────────────────────────────────────────────
-  hp: z.number().min(StatsConstants.hpMinValue).max(StatsConstants.hpMaxValue),
+  hp: z.number().min(StatConstants.boundaries.hpMinValue).max(StatConstants.boundaries.hpMaxValue),
   hpperlevel: z
     .number()
-    .min(StatsConstants.hpPerLevelMinValue)
-    .max(StatsConstants.hpPerLevelMaxValue),
+    .min(StatConstants.boundaries.hpPerLevelMinValue)
+    .max(StatConstants.boundaries.hpPerLevelMaxValue),
 
   // ─── MP & MP Per Level ────────────────────────────────────────────────────
-  mp: z.number().min(StatsConstants.mpMinValue).max(StatsConstants.mpMaxValue),
+  mp: z.number().min(StatConstants.boundaries.mpMinValue).max(StatConstants.boundaries.mpMaxValue),
   mpperlevel: z
     .number()
-    .min(StatsConstants.mpPerLevelMinValue)
-    .max(StatsConstants.mpPerLevelMaxValue),
+    .min(StatConstants.boundaries.mpPerLevelMinValue)
+    .max(StatConstants.boundaries.mpPerLevelMaxValue),
 
   // ─── Movespeed ────────────────────────────────────────────────────────────
-  movespeed: z.number().min(StatsConstants.movespeedMinValue).max(StatsConstants.movespeedMaxValue),
+  movespeed: z
+    .number()
+    .min(StatConstants.boundaries.movespeedMinValue)
+    .max(StatConstants.boundaries.movespeedMaxValue),
 
   // ─── Armor & Armor Per Level ──────────────────────────────────────────────
-  armor: z.number().min(StatsConstants.armorMinValue).max(StatsConstants.armorMaxValue),
+  armor: z
+    .number()
+    .min(StatConstants.boundaries.armorMinValue)
+    .max(StatConstants.boundaries.armorMaxValue),
   armorperlevel: z
     .number()
-    .min(StatsConstants.armorPerLevelMinValue)
-    .max(StatsConstants.armorPerLevelMaxValue),
+    .min(StatConstants.boundaries.armorPerLevelMinValue)
+    .max(StatConstants.boundaries.armorPerLevelMaxValue),
 
   // ─── Spellblock & Spellblock Per Level ────────────────────────────────────
   spellblock: z
     .number()
-    .min(StatsConstants.spellblockMinValue)
-    .max(StatsConstants.spellblockMaxValue),
+    .min(StatConstants.boundaries.spellblockMinValue)
+    .max(StatConstants.boundaries.spellblockMaxValue),
   spellblockperlevel: z
     .number()
-    .min(StatsConstants.spellblockPerLevelMinValue)
-    .max(StatsConstants.spellblockPerLevelMaxValue),
+    .min(StatConstants.boundaries.spellblockPerLevelMinValue)
+    .max(StatConstants.boundaries.spellblockPerLevelMaxValue),
 
   // ─── Attack Range ─────────────────────────────────────────────────────────
   attackrange: z
     .number()
-    .min(StatsConstants.attackRangeMinValue)
-    .max(StatsConstants.attackRangeMaxValue),
+    .min(StatConstants.boundaries.attackRangeMinValue)
+    .max(StatConstants.boundaries.attackRangeMaxValue),
 
   // ─── HP Regen & HP Regen Per Level ────────────────────────────────────────
-  hpregen: z.number().min(StatsConstants.hpRegenMinValue).max(StatsConstants.hpRegenMaxValue),
+  hpregen: z
+    .number()
+    .min(StatConstants.boundaries.hpRegenMinValue)
+    .max(StatConstants.boundaries.hpRegenMaxValue),
   hpregenperlevel: z
     .number()
-    .min(StatsConstants.hpRegenPerLevelMinValue)
-    .max(StatsConstants.hpRegenPerLevelMaxValue),
+    .min(StatConstants.boundaries.hpRegenPerLevelMinValue)
+    .max(StatConstants.boundaries.hpRegenPerLevelMaxValue),
 
   // ─── MP Regen & MP Regen Per Level ────────────────────────────────────────
-  mpregen: z.number().min(StatsConstants.mpRegenMinValue).max(StatsConstants.mpRegenMaxValue),
+  mpregen: z
+    .number()
+    .min(StatConstants.boundaries.mpRegenMinValue)
+    .max(StatConstants.boundaries.mpRegenMaxValue),
   mpregenperlevel: z
     .number()
-    .min(StatsConstants.mpRegenPerLevelMinValue)
-    .max(StatsConstants.mpRegenPerLevelMaxValue),
+    .min(StatConstants.boundaries.mpRegenPerLevelMinValue)
+    .max(StatConstants.boundaries.mpRegenPerLevelMaxValue),
 
   // ─── Crit & Crit Per Level ────────────────────────────────────────────────
-  crit: z.number().min(StatsConstants.critMinValue).max(StatsConstants.critMaxValue),
+  crit: z
+    .number()
+    .min(StatConstants.boundaries.critMinValue)
+    .max(StatConstants.boundaries.critMaxValue),
   critperlevel: z
     .number()
-    .min(StatsConstants.critPerLevelMinValue)
-    .max(StatsConstants.critPerLevelMaxValue),
+    .min(StatConstants.boundaries.critPerLevelMinValue)
+    .max(StatConstants.boundaries.critPerLevelMaxValue),
 
   // ─── Attack Damage & Attack Damage Per Level ──────────────────────────────
   attackdamage: z
     .number()
-    .min(StatsConstants.attackDamageMinValue)
-    .max(StatsConstants.attackDamageMaxValue),
+    .min(StatConstants.boundaries.attackDamageMinValue)
+    .max(StatConstants.boundaries.attackDamageMaxValue),
   attackdamageperlevel: z
     .number()
-    .min(StatsConstants.attackDamagePerLevelMinValue)
-    .max(StatsConstants.attackDamagePerLevelMaxValue),
+    .min(StatConstants.boundaries.attackDamagePerLevelMinValue)
+    .max(StatConstants.boundaries.attackDamagePerLevelMaxValue),
 
   // ─── Attack Speed & Attack Speed Per Level ────────────────────────────────
   attackspeedperlevel: z
     .number()
-    .min(StatsConstants.attackSpeedPerLevelMinValue)
-    .max(StatsConstants.attackSpeedPerLevelMaxValue),
+    .min(StatConstants.boundaries.attackSpeedPerLevelMinValue)
+    .max(StatConstants.boundaries.attackSpeedPerLevelMaxValue),
   attackspeed: z
     .number()
-    .min(StatsConstants.attackSpeedMinValue)
-    .max(StatsConstants.attackSpeedMaxValue),
+    .min(StatConstants.boundaries.attackSpeedMinValue)
+    .max(StatConstants.boundaries.attackSpeedMaxValue),
 });
 
 // ────────────────────────────────────────────────────────────────────────────
 // ─── TYPE ───────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────
 
-export type ChampionStats = z.infer<typeof ChampionStatsSchema>;
+export type ChampionStat = z.infer<typeof ChampionStatSchema>;
